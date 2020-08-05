@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/jquery-1.11.3.min.js"></script>
+    <style>
+        #subOne{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+        <form class="formClass" id="formOne">
+            用户名：<input id="userName" class="userName" type="text">
+            密 码：<input id="password" class="password" type="password">
+            地址：<input id="address" class="address" type="text">
+            <input type="submit" value="提交" onclick="btn()">
+        </form>
+        这是一个html！<input type="button" id="subOne" value="点我">
+</body>
+</html>
+<script>
+
+
+        // $("#btn").on("click",function () {
+        //     debugger
+        //     var val = $("#userName").val();
+        //     var array = $("#formOne").serializeArray();
+        //     var array2 = $("#formOne").serialize();
+        //
+        //     alert(array)
+        // })
+function btn() {
+    debugger;
+    var serialize = $("#formOne").serialize();
+    alert(serialize)
+}
+
+
+</script>

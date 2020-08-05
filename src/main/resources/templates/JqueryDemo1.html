@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--    <style>
+            .formClass{
+                color:red
+            }
+        </style>-->
+    <link rel="stylesheet" href="../com/itcast/demo/css/JqueryDemo1.css">
+
+</head>
+<!--引入jquery 必须-->
+<script src="../com/itcast/demo/js/jquery-1.11.3.min.js"></script>
+<body>
+<form class="formClass">
+    姓名:<input type="text" class="userNameClass" id="userName"> <br>
+    住址:<input type="text" class="addressClass" id="address"> <br>
+    <!--        毕业学校:<input type="text" class="schoolClass" id="school"> <br>-->
+    <!--        毕业学校:<select id="sel">-->
+    <!--        <option value="1" selected="selected">请选择</option>-->
+    <!--        <option value="2" >湖南工业大学</option>-->
+    <!--        <option value="3" >湖南中医药大学</option>-->
+    <!--        <option value="4" >湖南理工大学</option>-->
+    <!--        </select> <br>-->
+    毕业学校:<select id="sel1">
+    <option value="1" selected="selected">请选择</option>
+</select><select id="sel2">
+    <option value="1" selected="selected">请选择</option>
+</select><br>
+    性别:<input type="text" class="sexClass" id="sex"> <br>
+    <input type="button" class="buttonClass" id="btn" value="提交">
+
+</form>
+
+<input type="button" class="buttonClass" id="btnTwo" value="提交Two" onclick="btnOn()"/>
+<hr>
+
+</body>
+</html>
+<script>
+            //alert($("#userName").val());
+            debugger
+                    $("#btn").on("click",function(){
+                        console.log("事件绑定成功")
+                       var userName= $("#userName").val();
+                       var address= $("#address").val();
+                       var school= $("#school").val();
+                       var sex= $("#sex").val();
+                        alert(userName+"-"+address+"-"+school+"-"+sex)
+                    })
+
+                        function btnOn(){
+                    debugger
+                        alert("btnTwo")
+                    }
+
+                    $(document).ready(function(){
+                    debugger
+                        var options={"1":"["a1","a2"],"2":["b1","b2"]};
+        $("#sel1").change(function(){
+            $("#sel2").empty();
+            if(typeof options[$(this).val()]=="undefined"){
+                return;
+            }
+            ;
+            for(i=0;i<potions[$(this).val()].length;i++){
+                $("<option>"+options[$(this).val()[i]+"</option").appendTo($("#sel2"));
+            }
+        })
+                    })
+
+
+
+
+</script>

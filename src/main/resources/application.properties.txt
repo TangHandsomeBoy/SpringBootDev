@@ -1,0 +1,45 @@
+server.port = 8080
+
+spring.datasource.url = jdbc:mysql://localhost:3306/test?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+spring.datasource.username = root
+spring.datasource.password = root
+spring.datasource.driverClassName = com.mysql.cj.jdbc.Driver
+spring.datasource.max-active=20
+spring.datasource.max-idle=8
+spring.datasource.min-idle=8
+spring.datasource.initial-size=10
+
+spring.redis.port=6379
+spring.redis.host=127.0.0.1
+
+
+mybatis.mapper-locations=classpath:mapper/*.xml
+
+#thymeleaf start
+#视图解析器的前缀放在这个文件夹
+spring.thymeleaf.prefix=classpath:/templates/
+#后缀
+spring.thymeleaf.suffix=.html
+#模式
+spring.thymeleaf.mode=LEGACYHTML5
+spring.thymeleaf.servlet.content-type=text/html
+#编码格式
+spring.thymeleaf.encoding=utf-8
+#不用缓存
+#spring.thymeleaf.cache=false
+#spring.resources.chain.strategy.content.enabled=true
+#spring.resources.chain.strategy.content.paths=/**
+#thymeleaf end
+
+task.work.delay=2000
+
+
+#微信支付信息配置
+# 微信公众账号或开放平台APP的唯一标识
+weixin.appid=wx8397f8696b538317
+#财付通平台的商户账号
+weixin.partner= 1473426802        
+#财付通平台的商户密钥
+weixin.partnerkey= T6m9iK73b0kn9g5v426MKfHQH7X8rKwb 
+#回调地址
+weixin.notifyurl= http://www.itcast.cn 

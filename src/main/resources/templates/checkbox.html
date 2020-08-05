@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+
+<body>
+<input type="checkbox" value="橘子" name="check">橘子1</input><br>
+<input type="checkbox" value="香蕉" name="check">香蕉1</input><br>
+<input type="checkbox" value="西瓜" name="check">西瓜1</input><br>
+<input type="checkbox" value="芒果" name="check">芒果1</input><br>
+<input type="checkbox" value="葡萄" name="check">葡萄1</input><br>
+
+<input type="button" value="方法1" id="b1">
+<input type="button" value="方法2" id="b2">
+</body>
+
+<script>
+    //方法一
+    $('#b1').click(function () {
+
+        $.each( $('input:checkbox:checked'),function () {
+            window.alert("你选了:"+$('input[type=checkbox]:checked').length+"个,其中有："+$(this).val());
+        });
+    });
+
+    //方法二
+    $('#b2').click(function () {
+        $.each($('input:checkbox'),function () {
+            if(this.checked){
+                window.alert("你选了:"+$('input[type=checkbox]:checked').length+"个,其中有："+$(this).val())
+            }
+        })
+    })
+</script>
+</html>

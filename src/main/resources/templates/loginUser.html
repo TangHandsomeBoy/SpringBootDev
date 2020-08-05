@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../../java/com/itcast/demo/css/JqueryDemo1.css">
+</head>
+<!--<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>-->
+
+<body>
+<form class="userForm" >
+    <div class="namediv">
+       用户名: <input id="userName" name="userName" value="" /><br>
+       密 码: <input id="password" type="password" name="password" value=""/><br>
+
+        <input type="button" value="登录" id="btn" onclick=btnA()>
+        <!--<input type="button" value="查看详情" id="btn2" th:href="userDetail.html">-->
+    </div>
+</form>
+<script>
+    function btnA() {
+        debugger;
+        var formParam =$('.userForm').serialize();
+        $.ajax({
+            type:'post',
+            data:formParam,
+            url:'/login/judeg',
+            dataType:"json",
+            error : function () {
+                alert("失败！");
+            },
+            success:function (data) {
+                debugger
+                if(data.code==1){
+                    alert(data.message)
+                    location.href ="/login/cuowu";
+                }else {
+                    alert(data.message)
+                    location.href ="/userDetail";
+                }
+            }
+        })
+    }
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<body>
+<form class="userForm" >
+    <div class="namediv">
+       用户名: <input id="userName" name="userName" value="" /><br>
+       电话: <input id="phone" name="phone" value=""/><br>
+       性别: <input id="sex" name="sex" value=""/><br>
+       住址： <input id="address" name="address" value="" /><br>
+        <input type="button" value="提交" id="btn" onclick=btnA()>
+        <input type="button" value="查看详情" id="btn2" th:href="userDetail.html">
+    </div>
+</form>
+<script>
+    function btnA() {
+        var formParam =$('.userForm').serialize();
+        $.ajax({
+            type:'post',
+            data:formParam,
+            url:'/selectUser',
+            dataType:"json",
+            error : function () {
+                alert("失败！");
+            },
+            success:function (data) {
+                var va=data.userName;
+                    location.href ="/userDetail?userName="+va;
+                //跳转页面
+                alert(data.userName);
+              console.log(data)
+            }
+        })
+
+    }
+    /*$('#btn').click('click',function () {
+        debugger
+        $.ajax({
+            method:'post',
+            url:'http://localhost/selectUser',
+            success:function (result) {
+                console.log(result);
+            },
+            dateType:'jsonp'
+        })
+    })*/
+</script>
+
+</body>
+
+</html>

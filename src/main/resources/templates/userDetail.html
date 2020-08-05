@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>表格</title>
+</head>
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+
+<body>
+
+<table border="1">
+    <colgroup><!-- 定义了一个列的分组 -->
+        <!-- 选中表格前两列，把背景色定义为红色 -->
+        <col span="1" style="background: red;" /><!-- span代表选中的某些列 -->
+        <col span="4" style="background: yellow;" />
+    </colgroup>
+    <!-- 把表格外部边框加粗，数值没有上限，下限为0或者-1 -->
+    <thead>
+    <!-- 表格的标题 -->
+    <tr class="fl">
+        <!-- 代表了一行数据 -->
+        <th>编号</th>
+        <!-- 标题的内容 -->
+        <th>名字</th>
+        <th>性别</th>
+        <th>手机号</th>
+        <th>住址</th>
+        <th>操作 |
+            <a href="">新增</a>
+        </th>
+    </tr>
+
+
+    </thead>
+    <!-- tfoot是HTML5的，他定义了一个表格的底部，无论顺序放在哪，总是在表格的最下面 -->
+    <!--<tfoot>
+        <tr>
+            <td>总人数</td>
+            <td>100人</td>
+        </tr>
+    </tfoot>-->
+    <tbody class="tbd">
+    <!-- 表格标题对应的内容，标题和内容是一一对应的 -->
+    <tr class="shuju">
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>
+            <a href="/updateUser">修改</a> |
+            <a href="">删除</a>
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+</body>
+
+<script>
+        $.ajax({
+        type:'post',
+        data:"",
+        url:'/selectUser',
+        error : function () {
+            alert("失败！");
+        },
+        success:function (data) {
+            console.log(data)
+            var myut="";
+            if(data.length>0){
+                for(var i=0;i<data.length;i++){
+/*
+                    myut+="<tbody class=\"tbd\">\n" +
+                        "    <!-- 表格标题对应的内容，标题和内容是一一对应的 -->\n" +
+                        "    <tr class=\"shuju\">\n" +
+                        "        <td></td>\n" +
+                        "        <td></td>\n" +
+                        "        <td></td>\n" +
+                        "        <td></td>\n" +
+                        "        <td></td>\n" +
+                        "        <td>\n" +
+                        "            <a href=\"/updateUser\">修改</a> |\n" +
+                        "            <a href=\"\">删除</a>\n" +
+                        "        </td>\n" +
+                        "    </tr>\n" +
+                        "\n" +
+                        "    </tbody>"*/
+
+                    myut+=
+                        "    <tr class=\"shuju\">\n" +
+                        "        <td>"+data[i].userId+"</td>\n" +
+                        "        <td>"+data[i].userName+"</td>\n" +
+                        "        <td>"+data[i].sex+"</td>\n" +
+                        "        <td>"+data[i].phone+"</td>\n" +
+                        "        <td>"+data[i].address+"</td>\n" +
+                        "        <td>\n" +
+                        "            <a href=\"/updateUser?userId="+data[i].userId+"\" <!--type=\"button\" onclick=\"amend(data[i].userId)\"-->修改</a> |\n" +
+                        "            <a href=\"\">删除</a>\n" +
+                        "        </td>\n" +
+                        "    </tr>\n" +
+                        "\n"
+                    $(".tbd").html(myut)
+                }
+
+            }
+
+        }
+    })
+/*
+    function amend(index) {
+            alert(123)
+            debugger
+        $.ajax({
+            type:'post',
+            data:"",
+            url:'/selectUser',
+            error : function () {
+                alert("失败！");
+            },
+            success : function () {
+                location.href="/updateUser?userName="+index;
+                alert("成功！");
+            },
+        })
+    }*/
+
+</script>
+</html>

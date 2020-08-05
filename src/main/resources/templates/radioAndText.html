@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+No <input type="radio" name="answer" checked="checked" value="no"/>
+Yes<input type="radio" name="answer" value="yes"/>
+Other <input type="radio" name="answer" value="other"/>
+
+<input style="display:none;" type="text" name="otherAnswer" id="otherAnswer"/>
+
+</body>
+<script>
+    $(function () {
+        $("input[type='radio']").change(function () {
+            debugger
+            if($(this.val()=="other")){
+                $('#otherAnswer').show();
+            }
+            else {
+                $('#otherAnswer').hide();
+            }
+        })
+    })
+
+</script>
+</html>

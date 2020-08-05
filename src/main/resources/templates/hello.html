@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<link href="/layui/css/layui.css" th:href="@{/layui/css/layui.css}" rel="stylesheet">
+<script src="/js/jquery-1.9.1.min.js" th:src="@{/js/jquery-1.9.1.min.js}"></script>
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<body>
+
+<p th:text="'Hello, ' + ${name} + '!'">3333</p>
+
+
+<!--
+<form class="userForm" >
+    <div class="namediv">
+       用户名: <input id="userName" name="userName" value="" /><br>
+       电话: <input id="phone" name="phone" value=""/><br>
+       性别: <input id="sex" name="sex" value=""/><br>
+       住址： <input id="address" name="address" value="" /><br>
+        <input type="button" value="提交" id="btn" onclick=btnA()>
+    </div>
+</form>
+<script>
+    function btnA() {
+        debugger
+        var formParam =$('.userForm').serialize();
+        alert(123);
+        $.ajax({
+            type:'post',
+            data:formParam,
+            url:'http://localhost:8080/selectUser',
+            async:false,
+            dataType:'json',
+            success:function (data) {
+                var dataResult=data.data
+
+                if(data.code==200){
+                    $
+                }
+            }
+        })
+
+    }-->
+
+
+
+</body>
+
+</html>

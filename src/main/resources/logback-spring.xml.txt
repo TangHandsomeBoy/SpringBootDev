@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="60 seconds">
+    <!-- 定义参数 -->
+    <property name="log.pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n" />
+    <!-- 控制台打印设置 -->
+    <appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${log.pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- logstash设置 -->
+    <appender name="logstash1" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <param name="Encoding" value="UTF-8"/>
+        <!-- logstash服务器ip -->
+        <remoteHost>128.224.167.84</remoteHost>
+        <!-- logstash tcp 端口-->
+        <port>4569</port>
+        <!-- <filter class="com.program.interceptor.ELKFilter"/>-->//引入过滤类
+        <!-- encoder is required -->
+        <encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder" >
+            <customFields>{"appname":"ceshi"}</customFields> // 索引名
+        </encoder>
+    </appender>
+
+    <appender name="TCP_LOGSTASH"  class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+        <destination>128.224.167.84:4569</destination>
+        <!--<encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder"/>-->
+        <encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder" >
+            <customFields>{"appname":"ceshi"}</customFields> // 索引名
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/${APP_NAME}--info-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <filter class="ch.qos.logback.classic.filter.LevelFilter">
+                <level>INFO</level>
+                <onMatch>ACCEPT</onMatch>
+                <onMismatch>DENY</onMismatch>
+            </filter>
+        </rollingPolicy>
+    </appender>
+
+    <!--<appender name="LOGSTASH1" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+         &lt;!&ndash;配置logStash 服务地址&ndash;&gt;
+         <destination>128.224.167.84:4569</destination>
+         &lt;!&ndash; 日志输出编码 &ndash;&gt;
+         <encoder charset="UTF-8" class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+          <providers>
+          <timestamp>
+           <timeZone>UTC</timeZone>
+          </timestamp>
+          <pattern>
+           <pattern>
+           {
+           "appname":"ceshi",
+           "logLevel": "%level",
+           "pid": "${PID:-}",
+           "thread": "%thread",
+           "class": "%logger{40}",
+           "rest": "%message"
+           }
+           </pattern>
+          </pattern>
+          </providers>
+         </encoder>
+     </appender>-->
+
+    <root level="debug">
+        <appender-ref ref="consoleAppender" />
+        <!--<appender-ref ref="LOGSTASH1"/>-->
+    </root>
+</configuration>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../com/itcast/demo/js/bootstrap.css">
+</head>
+<body>
+    <table class="table table-border table-hover">
+        <thead>
+            <tr>
+                <th>序号</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>年龄</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <div class="page">
+            <ul class="pagination"></ul>
+    </div>
+
+    <script type="text/template" id="tableTemp">
+        <%for(let i=0; i<item.length; i++){%>
+            <tr>
+                <td><%=(item[i].page * item[i].pageSize) + i + 1%></td>
+                <td><%=item[i].name%></td>
+                <td><%=item[i].gender%></td>
+                <td><%=item[i].age%></td>
+            </tr>
+        <%}%>
+    </script>
+</body>
+</html>
+
+<!--引入jquery 必须-->
+<script src="../com/itcast/demo/js/jquery-1.11.3.min.js"></script>
+<script src="../com/itcast/demo/js/bootstrap.js"></script>
+<script src="../com/itcast/demo/js/pagination.js"></script>
+<script src="../com/itcast/demo/js/_baseIsNative.js"></script>
+<script>
+    let currentPage=1;
+    let pageSize=5;
+    function render(){
+    debugger;
+        $.ajax({
+            url:"/selectUser",
+            data:{
+                page: currentPage,
+                pageSize: pageSize
+            },
+            dataType: "json",
+            success: function(result){
+                //将数据渲染到页面
+                $("tbody").html(template("tableTemp",{item:result}))
+                //调用分页函数
+                setPage(currentPage,Math.ceil(result[0].size/pageSize),render)
+            }
+        })
+    }
+    render()
+
+    function setPage(pageCurrent,pageSum,callback){
+       $(".pagination").bootstrapPaginator({
+        //设置版本号
+        bootstrapMajorVersion: 3,
+        //显示几页
+        currentPage: pageCurrent,
+        //总页数
+        totalPages: pageSum,
+        //当单击操作按钮的时候，执行该函数，调用ajax渲染页面
+        onPageClicked: function(event,originalEvent,type,page){
+            //把当前点击的页码赋值给currentPage，调用ajax渲染页面
+            currentPage=page
+            callback && callback()
+        }
+       })
+    }
+</script>

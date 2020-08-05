@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<body>
+<form class="userForm" >
+  <input id="userId" name="userId" value="" type="hidden" /><br>
+    <div class="namediv">
+       用户名: <input id="userName" name="userName" value="" /><br>
+       电话: <input id="phone" name="phone" value=""/><br>
+       性别: <input id="sex" name="sex" value=""/><br>
+       住址： <input id="address" name="address" value="" /><br>
+        <input type="button" value="提交" id="btn" onclick=btnA()>
+        <input type="button" value="查看详情" id="btn2" >
+    </div>
+</form>
+<script>
+
+        //var URL = document.location.toString();
+        var url=window.location.search; //获取url中"?"符后的字串  
+        if(url.indexOf("?")!=-1){
+            var id = url.substr(url.indexOf("=")+1);
+        }
+
+        $.ajax({
+            type:'post',
+            data:{userId:id},
+            url:'/selectById',
+            dataType:"json",
+            error : function () {
+                alert("失败！");
+            },
+            success : function (data) {
+                console.log(data)
+                $("#userName").val(data.userName);
+                $("#phone").val(data.phone);
+                $("#sex").val(data.sex);
+                $("#address").val(data.address);
+                $("#userId").val(data.userId);
+
+            },
+        })
+
+    function btnA() {
+            var formValue=$(".userForm").serialize();
+            console.log(formValue)
+        $.ajax({
+            type:'post',
+            data:formValue,
+            url:'/updateById',
+            dataType:"json",
+            error : function () {
+                alert("失败！");
+            },
+            success : function (data) {
+               if(data>0){
+                   alert("操作成功！")
+               }else {
+                   alert("操作失败！")
+               }
+
+            },
+        })
+    }
+
+</script>
+
+</body>
+
+</html>

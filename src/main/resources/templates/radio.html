@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+
+<body>
+<form id="form1" >
+    　　<input type="radio"  name="sex" value="男" />男
+    　　<input type="radio" name="sex" value="女" />女
+    <br />
+    　　<input type="radio"  name="list" value="十分满意" />十分满意
+    　　<input type="radio" name="list" value="满意" />满意
+    　　<input type="radio" name="list" value="不满意" />不满意
+    　　<input type="radio" name="list" value="非常差" />非常差
+    <br />
+    　　<input type="submit" value="submit"  id="btnSubmit" />
+</form>
+</body>
+
+<script>
+    $(function () {
+        $('#btnSubmit').click(function () {
+            var val=$('input:radio[name="sex"]:checked').val();
+            if(val==null){
+                alert("请选择性别!")
+                return false;
+            }
+            else {
+                alert(val);
+            }
+            var list=$('input:radio[name="list"]:checked').val();
+            if(list==null){
+                alert("请给个评价!")
+                return false;
+            }
+            else {
+                alert(list);
+            }
+        })
+    })
+</script>
+</html>
